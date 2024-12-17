@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Live Counter</title>
+    <style>
+        /* Body styling */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            flex-direction: column;
+        }
+
+        /* Enlarged card styling */
+        .card {
+            background-color: burlywood;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            padding: 40px 50px;
+            text-align: center;
+            width: 600px;  /* Increased width for a larger card */
+            box-sizing: border-box;
+        }
+
+        /* Counter styling */
+        .counter {
+            font-size: 80px;  /* Increased font size for better visibility */
+            font-weight: bold;
+            margin-bottom: 30px;  /* More space between counter and buttons */
+            color: #333;
+        }
+
+        /* Button container styling */
+        .buttons {
+            display: flex;
+            justify-content: space-between;  /* Space between buttons */
+            gap: 20px;  /* Creates consistent space between buttons */
+            margin-top: 20px;
+        }
+
+        /* Button styling */
+        button {
+            font-size: 22px;  /* Slightly larger font for better readability */
+            padding: 15px 30px;
+            cursor: pointer;
+            border: 2px solid #007bff;
+            border-radius: 5px;
+            background-color: #007bff;
+            color: white;
+            transition: background-color 0.3s ease;
+            flex-grow: 1;  /* Ensures buttons stretch evenly within the container */
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        button:active {
+            background-color: #004085;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Card Container -->
+    <div class="card">
+        <!-- Counter Display -->
+        <div class="counter" id="counter">0</div>
+        
+        <!-- Buttons to control the counter -->
+        <div class="buttons">
+            <button onclick="increment()">Increment</button>
+            <button onclick="decrement()">Decrement</button>
+            <button onclick="resetCounter()">Reset</button>
+        </div>
+    </div>
+
+    <script>
+        // Initialize the counter variable
+        let count = 0;
+
+        // Function to update the counter on the webpage and log to console
+        function updateCounter() {
+            document.getElementById("counter").textContent = count;
+            console.log("Counter: " + count);
+        }
+
+        // Function to increment the counter
+        function increment() {
+            count++;
+            updateCounter();
+        }
+
+        // Function to decrement the counter
+        function decrement() {
+            count--;
+            updateCounter();
+        }
+
+        // Function to reset the counter
+        function resetCounter() {
+            count = 0;
+            updateCounter();
+        }
+    </script>
+
+</body>
+</html>

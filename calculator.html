@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3D Geometry Calculator</title>
+    <style>
+        /* Global Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(45deg, #1f3c5a, #5276a5);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            color: white;
+            overflow: hidden;
+            padding: 20px;
+        }
+
+        .container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            gap: 15px;
+            width: 90%;
+            max-width: 1100px;
+            text-align: center;
+            background-color: rgba(255, 255, 255, 0.1);
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.2);
+            backdrop-filter: blur(8px);
+        }
+
+        .calculator {
+            width: 220px; /* Reduced width for smaller cards */
+            background-color: rgba(255, 255, 255, 0.2);
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        h1 {
+            font-size: 32px;
+            margin-bottom: 30px;
+            font-weight: 700;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            font-size: 16px; /* Adjusted font size */
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        input {
+            padding: 10px;
+            width: 100%; /* Full width for better input space */
+            margin: 10px 0;
+            font-size: 16px; /* Adjusted font size */
+            border: none;
+            border-radius: 8px;
+            background-color: #3a4e77;
+            color: white;
+            outline: none;
+            transition: background-color 0.3s;
+        }
+
+        input:focus {
+            background-color: #5c7b97;
+        }
+
+        button {
+            background-color: #4caf50;
+            color: white;
+            padding: 12px 20px;
+            font-size: 16px; /* Adjusted font size */
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: transform 0.3s;
+            width: 100%; /* Full width for button */
+        }
+
+        button:hover {
+            transform: scale(1.05);
+            background-color: #45a049;
+        }
+
+        button:active {
+            transform: scale(0.98);
+        }
+
+        .result {
+            background-color: #1e2f47;
+            padding: 15px;
+            margin-top: 10px;
+            border-radius: 10px;
+            font-size: 16px; /* Adjusted font size */
+            transition: background-color 0.3s;
+        }
+
+        .result:hover {
+            background-color: #5c7b97;
+        }
+
+        .error {
+            color: red;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <!-- Cube Volume -->
+        <div class="calculator">
+            <h2>Cube</h2>
+            <div class="form-group">
+                <label for="cubeSide">Side Length:</label>
+                <input type="number" id="cubeSide" placeholder="Enter side length of cube">
+                <button onclick="calculateCubeVolume()">Calculate Volume</button>
+            </div>
+        </div>
+
+        <!-- Sphere Volume -->
+        <div class="calculator">
+            <h2>Sphere</h2>
+            <div class="form-group">
+                <label for="sphereRadius">Radius:</label>
+                <input type="number" id="sphereRadius" placeholder="Enter radius of sphere">
+                <button onclick="calculateSphereVolume()">Calculate Volume</button>
+            </div>
+        </div>
+
+        <!-- Cylinder Volume -->
+        <div class="calculator">
+            <h2>Cylinder</h2>
+            <div class="form-group">
+                <label for="cylinderRadius">Radius:</label>
+                <input type="number" id="cylinderRadius" placeholder="Enter radius of cylinder">
+                <label for="cylinderHeight">Height:</label>
+                <input type="number" id="cylinderHeight" placeholder="Enter height of cylinder">
+                <button onclick="calculateCylinderVolume()">Calculate Volume</button>
+            </div>
+        </div>
+
+        <!-- Cone Volume -->
+        <div class="calculator">
+            <h2>Cone</h2>
+            <div class="form-group">
+                <label for="coneRadius">Radius:</label>
+                <input type="number" id="coneRadius" placeholder="Enter radius of cone">
+                <label for="coneHeight">Height:</label>
+                <input type="number" id="coneHeight" placeholder="Enter height of cone">
+                <button onclick="calculateConeVolume()">Calculate Volume</button>
+            </div>
+        </div>
+
+        <!-- Rectangular Prism Volume -->
+        <div class="calculator">
+            <h2>Rectangular Prism</h2>
+            <div class="form-group">
+                <label for="rectPrismLength">Length:</label>
+                <input type="number" id="rectPrismLength" placeholder="Enter length of prism">
+                <label for="rectPrismWidth">Width:</label>
+                <input type="number" id="rectPrismWidth" placeholder="Enter width of prism">
+                <label for="rectPrismHeight">Height:</label>
+                <input type="number" id="rectPrismHeight" placeholder="Enter height of prism">
+                <button onclick="calculateRectPrismVolume()">Calculate Volume</button>
+            </div>
+        </div>
+
+        <!-- Pyramid Volume -->
+        <div class="calculator">
+            <h2>Pyramid</h2>
+            <div class="form-group">
+                <label for="pyramidBase">Base Area:</label>
+                <input type="number" id="pyramidBase" placeholder="Enter base area of pyramid">
+                <label for="pyramidHeight">Height:</label>
+                <input type="number" id="pyramidHeight" placeholder="Enter height of pyramid">
+                <button onclick="calculatePyramidVolume()">Calculate Volume</button>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Result Display -->
+    <div class="result" id="resultDisplay">Results will appear here...</div>
+
+    <script>
+        // Function to calculate the volume of a cube
+        function calculateCubeVolume() {
+            const side = parseFloat(document.getElementById("cubeSide").value);
+            if (side && side > 0) {
+                const volume = Math.pow(side, 3); // Volume of cube = side^3
+                const resultText = `Cube Volume: ${volume} cubic units`;
+                displayResult(resultText, resultText);
+            } else {
+                const errorText = "Please enter a valid side length for the cube!";
+                displayResult(errorText, errorText, true);
+            }
+        }
+
+        // Function to calculate the volume of a sphere
+        function calculateSphereVolume() {
+            const radius = parseFloat(document.getElementById("sphereRadius").value);
+            if (radius && radius > 0) {
+                const volume = (4 / 3) * Math.PI * Math.pow(radius, 3); // Volume of sphere = (4/3) * π * radius^3
+                const resultText = `Sphere Volume: ${volume.toFixed(2)} cubic units`;
+                displayResult(resultText, resultText);
+            } else {
+                const errorText = "Please enter a valid radius for the sphere!";
+                displayResult(errorText, errorText, true);
+            }
+        }
+
+        // Function to calculate the volume of a cylinder
+        function calculateCylinderVolume() {
+            const radius = parseFloat(document.getElementById("cylinderRadius").value);
+            const height = parseFloat(document.getElementById("cylinderHeight").value);
+            if (radius && height && radius > 0 && height > 0) {
+                const volume = Math.PI * Math.pow(radius, 2) * height; // Volume of cylinder = π * radius^2 * height
+                const resultText = `Cylinder Volume: ${volume.toFixed(2)} cubic units`;
+                displayResult(resultText, resultText);
+            } else {
+                const errorText = "Please enter valid radius and height for the cylinder!";
+                displayResult(errorText, errorText, true);
+            }
+        }
+
+        // Function to calculate the volume of a cone
+        function calculateConeVolume() {
+            const radius = parseFloat(document.getElementById("coneRadius").value);
+            const height = parseFloat(document.getElementById("coneHeight").value);
+            if (radius && height && radius > 0 && height > 0) {
+                const volume = (1 / 3) * Math.PI * Math.pow(radius, 2) * height; // Volume of cone = (1/3) * π * radius^2 * height
+                const resultText = `Cone Volume: ${volume.toFixed(2)} cubic units`;
+                displayResult(resultText, resultText);
+            } else {
+                const errorText = "Please enter valid radius and height for the cone!";
+                displayResult(errorText, errorText, true);
+            }
+        }
+
+        // Function to calculate the volume of a rectangular prism
+        function calculateRectPrismVolume() {
+            const length = parseFloat(document.getElementById("rectPrismLength").value);
+            const width = parseFloat(document.getElementById("rectPrismWidth").value);
+            const height = parseFloat(document.getElementById("rectPrismHeight").value);
+            if (length && width && height && length > 0 && width > 0 && height > 0) {
+                const volume = length * width * height; // Volume of rectangular prism = length * width * height
+                const resultText = `Rectangular Prism Volume: ${volume} cubic units`;
+                displayResult(resultText, resultText);
+            } else {
+                const errorText = "Please enter valid dimensions for the rectangular prism!";
+                displayResult(errorText, errorText, true);
+            }
+        }
+
+        // Function to calculate the volume of a pyramid
+        function calculatePyramidVolume() {
+            const baseArea = parseFloat(document.getElementById("pyramidBase").value);
+            const height = parseFloat(document.getElementById("pyramidHeight").value);
+            if (baseArea && height && baseArea > 0 && height > 0) {
+                const volume = (1 / 3) * baseArea * height; // Volume of pyramid = (1/3) * baseArea * height
+                const resultText = `Pyramid Volume: ${volume.toFixed(2)} cubic units`;
+                displayResult(resultText, resultText);
+            } else {
+                const errorText = "Please enter valid base area and height for the pyramid!";
+                displayResult(errorText, errorText, true);
+            }
+        }
+
+        // Function to display results both on the webpage and in the console
+        function displayResult(displayText, logText, isError = false) {
+            const resultElement = document.getElementById("resultDisplay");
+            resultElement.textContent = displayText;
+            if (isError) {
+                resultElement.classList.add("error");
+            } else {
+                resultElement.classList.remove("error");
+            }
+            console.log(logText);
+        }
+    </script>
+
+</body>
+</html>
