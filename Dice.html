@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dice Thrower Game</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #33334d;
+            margin: 0;
+        }
+
+        .game-container {
+            background-color: whitesmoke;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            width: 400px;
+        }
+
+        h1 {
+            margin-bottom: 20px;
+        }
+
+        .dice-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 20px 0;
+        }
+
+        .player {
+            font-size: 18px;
+            text-align: center;
+        }
+
+        .dice {
+            font-size: 80px;
+            margin-top: 10px;
+        }
+
+        .button-container {
+            margin-top: 20px;
+        }
+
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 5px;
+            border: none;
+            background-color: #4CAF50;
+            color: white;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        .result {
+            font-size: 20px;
+            margin-top: 20px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+<div class="game-container">
+    <h1>Dice Thrower Game</h1>
+
+    <div class="dice-container">
+        <div class="player">
+            <span id="player1Label">Player 1:</span>
+            <div id="player1Dice" class="dice">🎲</div>
+        </div>
+
+        <div class="player">
+            <span id="player2Label">Player 2:</span>
+            <div id="player2Dice" class="dice">🎲</div>
+        </div>
+    </div>
+
+
+    <div class="button-container">
+        <button onclick="rollDice()">Roll Dice</button>
+    </div>
+
+
+    <div id="result" class="result"></div>
+</div>
+
+<script>
+
+    function rollDice() {
+
+        let player1Roll = Math.floor(Math.random() * 6) + 1;
+        let player2Roll = Math.floor(Math.random() * 6) + 1;
+
+
+        document.getElementById('player1Dice').textContent = player1Roll;
+        document.getElementById('player2Dice').textContent = player2Roll;
+
+   
+        let resultText;
+        if (player1Roll > player2Roll) {
+            resultText = "Player 1 Wins!";
+        } else if (player2Roll > player1Roll) {
+            resultText = "Player 2 Wins!";
+        } else {
+            resultText = "It's a Tie!";
+        }
+
+        document.getElementById('result').textContent = resultText;
+    }
+</script>
+
+</body>
+</html>

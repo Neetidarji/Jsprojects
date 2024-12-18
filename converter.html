@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Converter</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: floralwhite;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .container {
+            background-color: whitesmoke;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            padding: 20px;
+            width: 400px;
+            text-align: center;
+        }
+
+        h1 {
+            margin-bottom: 20px;
+        }
+
+        select, input[type="number"], button {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            font-size: 16px;
+        }
+
+        button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        .radio-group {
+            display: flex;
+            justify-content: space-around;
+            margin-bottom: 10px;
+        }
+
+        .radio-group label {
+            margin-left: 10px;
+        }
+
+        .result {
+            margin-top: 20px;
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        .dropdown-group {
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Converter</h1>
+
+
+    <div class="dropdown-group">
+        <select id="conversionType" onchange="showConverterOptions()">
+            <option value="">Select Conversion</option>
+            <option value="temp">Temperature</option>
+            <option value="mass">Mass</option>
+            <option value="height">Height</option>
+        </select>
+    </div>
+
+
+    <div id="tempConverter" style="display: none;">
+        <h3>Temperature Conversion</h3>
+        <select id="tempUnitFrom">
+            <option value="C">Celsius</option>
+            <option value="F">Fahrenheit</option>
+        </select>
+        <input type="number" id="tempValue" placeholder="Enter value">
+        <button onclick="convertTemperature()">Convert</button>
+        <div id="tempResult" class="result"></div>
+    </div>
+
+
+    <div id="massConverter" style="display: none;">
+        <h3>Mass Conversion</h3>
+        <div class="radio-group">
+            <label><input type="radio" name="massUnit" value="kgToLb" checked> kg to lb</label>
+            <label><input type="radio" name="massUnit" value="lbToKg"> lb to kg</label>
+        </div>
+        <input type="number" id="massValue" placeholder="Enter value">
+        <button onclick="convertMass()">Convert</button>
+        <div id="massResult" class="result"></div>
+    </div>
+
+    <div id="heightConverter" style="display: none;">
+        <h3>Height Conversion</h3>
+        <div class="radio-group">
+            <label><input type="radio" name="heightUnit" value="mToFt" checked> meters to feet</label>
+            <label><input type="radio" name="heightUnit" value="ftToM"> feet to meters</label>
+        </div>
+        <input type="number" id="heightValue" placeholder="Enter value">
+        <button onclick="convertHeight()">Convert</button>
+        <div id="heightResult" class="result"></div>
+    </div>
+</div>
+
+<script>
+
+    function showConverterOptions() {
+        var conversionType = document.getElementById('conversionType').value;
+        document.getElementById('tempConverter').style.display = conversionType === 'temp' ? 'block' : 'none';
+        document.getElementById('massConverter').style.display = conversionType === 'mass' ? 'block' : 'none';
+        document.getElementById('heightConverter').style.display = conversionType === 'height' ? 'block' : 'none';
+    }
+
+ 
+    function convertTemperature() {
+        var unitFrom = document.getElementById('tempUnitFrom').value;
+        var value = parseFloat(document.getElementById('tempValue').value);
+        
+        if (isNaN(value)) {
+            document.getElementById('tempResult').textContent = 'Please enter a valid value.';
+            return;
+        }
+
+        var result;
+        if (unitFrom === 'C') {
+            result = (value * 9/5) + 32;
+            document.getElementById('tempResult').textContent = value + '°C = ' + result.toFixed(2) + '°F';
+        } else {
+            result = (value - 32) * 5/9; 
+            document.getElementById('tempResult').textContent = value + '°F = ' + result.toFixed(2) + '°C';
+        }
+    }
+
+
+    function convertMass() {
+        var selectedRadio = document.querySelector('input[name="massUnit"]:checked').value;
+        var value = parseFloat(document.getElementById('massValue').value);
+        
+        if (isNaN(value)) {
+            document.getElementById('massResult').textContent = 'Please enter a valid value.';
+            return;
+        }
+
+        var result;
+        if (selectedRadio === 'kgToLb') {
+            result = value * 2.20462; 
+            document.getElementById('massResult').textContent = value + ' kg = ' + result.toFixed(2) + ' lb';
+        } else {
+            result = value / 2.20462; 
+            document.getElementById('massResult').textContent = value + ' lb = ' + result.toFixed(2) + ' kg';
+        }
+    }
+
+ 
+    function convertHeight() {
+        var selectedRadio = document.querySelector('input[name="heightUnit"]:checked').value;
+        var value = parseFloat(document.getElementById('heightValue').value);
+        
+        if (isNaN(value)) {
+            document.getElementById('heightResult').textContent = 'Please enter a valid value.';
+            return;
+        }
+
+        var result;
+        if (selectedRadio === 'mToFt') {
+            result = value * 3.28084; 
+            document.getElementById('heightResult').textContent = value + ' meters = ' + result.toFixed(2) + ' feet';
+        } else {
+            result = value / 3.28084; 
+            document.getElementById('heightResult').textContent = value + ' feet = ' + result.toFixed(2) + ' meters';
+        }
+    }
+</script>
+
+</body>
+</html>
