@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Random Number Guessing Game</title>
+    <style>
+        /* Basic Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: #f4f4f9;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            color: #333;
+        }
+
+        .game-container {
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            width: 300px;
+        }
+
+        h1 {
+            font-size: 24px;
+            color: #5c5c5c;
+        }
+
+        input[type="number"] {
+            padding: 10px;
+            margin-top: 10px;
+            width: 60%;
+            font-size: 16px;
+            border: 2px solid #ddd;
+            border-radius: 5px;
+            outline: none;
+        }
+
+        input[type="number"]:focus {
+            border-color: #3498db;
+        }
+
+        button {
+            background-color: #3498db;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 15px;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #2980b9;
+        }
+
+        .result {
+            margin-top: 20px;
+            font-size: 18px;
+            color: #333;
+        }
+
+        .result.correct {
+            color: green;
+            font-weight: bold;
+        }
+
+        .result.wrong {
+            color: red;
+            font-weight: bold;
+        }
+
+        .reset-button {
+            background-color: #e74c3c;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            border-radius: 5px;
+            margin-top: 10px;
+            cursor: pointer;
+        }
+
+        .reset-button:hover {
+            background-color: #c0392b;
+        }
+
+    </style>
+</head>
+<body>
+
+<div class="game-container">
+    <h1>Random Number Guessing Game</h1>
+    <p>Guess the number between 1 and 100:</p>
+    <input type="number" id="userGuess" min="1" max="100" placeholder="Enter a number" />
+    <button id="submitGuessBtn">Guess</button>
+    <div id="message" class="result"></div>
+    <button id="resetBtn" class="reset-button" style="display: none;">Play Again</button>
+</div>
+
+<script>
+    // Variables for the game
+    let randomNumber = Math.floor(Math.random() * 100) + 1; // Random number between 1 and 100
+    let submitGuessBtn = document.getElementById('submitGuessBtn');
+    let userGuessInput = document.getElementById('userGuess');
+    let messageDiv = document.getElementById('message');
+    let resetBtn = document.getElementById('resetBtn');
+
+    // Function to handle the guess
+    function handleGuess() {
+        let userGuess = parseInt(userGuessInput.value);
+
+        if (isNaN(userGuess) || userGuess < 1 || userGuess > 100) {
+            messageDiv.textContent = "Please enter a valid number between 1 and 100.";
+            messageDiv.className = "result wrong";
+            return;
+        }
+
+        if (userGuess === randomNumber) {
+            messageDiv.textContent = "Congratulations! You guessed it right!";
+            messageDiv.className = "result correct";
+            submitGuessBtn.disabled = true; // Disable the guess button after correct guess
+            resetBtn.style.display = "block"; // Show reset button
+        } else if (userGuess < randomNumber) {
+            messageDiv.textContent = "Too low! Try again.";
+            messageDiv.className = "result wrong";
+        } else {
+            messageDiv.textContent = "Too high! Try again.";
+            messageDiv.className = "result wrong";
+        }
+    }
+
+    // Reset the game
+    function resetGame() {
+        randomNumber = Math.floor(Math.random() * 100) + 1; // Generate a new random number
+        userGuessInput.value = ''; // Clear the input field
+        messageDiv.textContent = ''; // Clear the message
+        submitGuessBtn.disabled = false; // Enable the submit button
+        resetBtn.style.display = "none"; // Hide the reset button
+    }
+
+    // Event listeners
+    submitGuessBtn.addEventListener('click', handleGuess);
+    resetBtn.addEventListener('click', resetGame);
+</script>
+
+</body>
+</html>
