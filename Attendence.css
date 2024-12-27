@@ -1,0 +1,116 @@
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 20px;
+    background-color: #f0f2f5;
+}
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+    color: #1a73e8;
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.webcam-container {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+#webcam {
+    border: 2px solid #1a73e8;
+    border-radius: 8px;
+    width: 400px;
+    height: 300px;
+}
+
+.controls {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    background-color: #1a73e8;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: #1557b0;
+}
+
+button:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+}
+
+.status {
+    text-align: center;
+    margin-bottom: 20px;
+    padding: 10px;
+    background-color: #f8f9fa;
+    border-radius: 5px;
+}
+
+.status span {
+    font-weight: bold;
+}
+
+#recognition {
+    color: #1a73e8;
+}
+
+#attendance.present {
+    color: #28a745;
+}
+
+#attendance.absent {
+    color: #dc3545;
+}
+
+.log-container {
+    margin-top: 20px;
+}
+
+#attendanceLog {
+    max-height: 200px;
+    overflow-y: auto;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 10px;
+}
+
+.log-entry {
+    padding: 8px;
+    border-bottom: 1px solid #eee;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.log-entry:last-child {
+    border-bottom: none;
+}
+
+.present-entry {
+    color: #28a745;
+}
+
+.absent-entry {
+    color: #dc3545;
+}
